@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wav2Lip Test Page</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+    </style>
+</head>
+<body class="bg-gray-50 min-h-screen">
+    <div class="container mx-auto px-4 py-8">
+        <div class="max-w-lg mx-auto bg-white rounded-lg shadow-lg p-6">
+            <h1 class="text-2xl font-bold text-center mb-4">Wav2Lip Test Page</h1>
+            <p class="text-gray-600 text-center">If you can see this page, the Flask server is running correctly.</p>
+            <div class="mt-4 p-4 bg-green-50 rounded-lg">
+                <p class="text-green-700">✓ Server is operational</p>
+                <p class="text-green-700">✓ Templates are working</p>
+                <p class="text-green-700">✓ Tailwind CSS is loaded</p>
+                {% if wav2lip_available %}
+                    <p class="text-green-700">✓ Wav2Lip functionality is available</p>
+                {% else %}
+                    <p class="text-yellow-700">⚠ Running in demo mode - Wav2Lip functionality is not available</p>
+                    <p class="text-sm text-gray-600 mt-2">Missing dependencies: PyTorch and related packages</p>
+                {% endif %}
+            </div>
+            {% if not wav2lip_available %}
+            <div class="mt-4 p-4 bg-yellow-50 rounded-lg">
+                <h2 class="font-semibold text-yellow-800">To enable full functionality:</h2>
+                <pre class="mt-2 p-2 bg-gray-800 text-white rounded overflow-x-auto">
+pip install torch torchvision torchaudio face-alignment</pre>
+            </div>
+            {% endif %}
+        </div>
+    </div>
+</body>
+</html>
